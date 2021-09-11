@@ -88,11 +88,8 @@ class _SearchPageState extends State<SearchPage> {
                                 ),
                               ),
                             ),
-                            leading: Text(
-                              _fighters![i].id.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(_fighters![i].imageUrl),
                             ),
                             title: Text(_fighters![i].name),
                             subtitle: Text(
