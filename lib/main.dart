@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_fighters/core/mock_search_fighter_repository.dart';
 
+import 'core/http_search_fighter_repository.dart';
 import 'page/search_page.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SearchPage(
-        repository: MockSearchFighterRepository(),
+        repository: HttpSearchFighterRepository(),
       ),
     );
   }
