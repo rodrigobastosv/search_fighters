@@ -31,16 +31,16 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(28),
-            child: _isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Column(
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Column(
                     children: [
                       TextFormField(
                         validator: (term) =>
@@ -78,29 +78,33 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                       if (_fighters != null)
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemBuilder: (_, i) => ListTile(
-                            onTap: () => Navigator.of(context).push(
-                              CupertinoPageRoute(
-                                builder: (_) => FighterPage(
-                                  fighter: _fighters![i],
+                        ..._fighters!.map(
+                          (fighter) {
+                            return ListTile(
+                              onTap: () => Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (_) => FighterPage(
+                                    fighter: fighter,
+                                  ),
                                 ),
                               ),
-                            ),
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(_fighters![i].imageUrl),
-                            ),
-                            title: Text(_fighters![i].name),
-                            subtitle: Text(
-                              '${_fighters![i].wins!.qtd} - ${_fighters![i].losses!.qtd} - ${_fighters![i].draws}',
-                            ),
-                          ),
-                          itemCount: _fighters!.length,
-                        ),
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                  fighter.imageUrl != null
+                                      ? fighter.imageUrl!
+                                      : 'https://th.bing.com/th/id/OIP.To3xjJmt3xBLqB_9FfQcvQHaHu?pid=ImgDet&rs=1',
+                                ),
+                              ),
+                              title: Text(fighter.name),
+                              subtitle: Text(
+                                '${fighter.wins?.qtd ?? 0} - ${fighter.losses?.qtd ?? 0} - ${fighter.draws}',
+                              ),
+                            );
+                          },
+                        ).toList(),
                     ],
                   ),
-          ),
+                ),
         ),
       ),
     );

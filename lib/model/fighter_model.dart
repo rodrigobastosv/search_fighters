@@ -4,10 +4,10 @@ import 'fighter_stats_model.dart';
 class FighterModel {
   final int id;
   final String name;
-  final String imageUrl;
-  final String birth;
+  final String? imageUrl;
+  final String? birth;
   final String country;
-  final String city;
+  final String? city;
   final dynamic age;
   final dynamic height;
   final dynamic weight;
@@ -34,20 +34,18 @@ class FighterModel {
 
   static FighterModel fromJson(Map<String, dynamic> json) {
     return FighterModel(
-      id: json['_id'],
+      id: json['id'],
       name: json['name'],
       imageUrl: json['imageUrl'],
-      birth: json['birth'],
+      birth: json['dateBirth'],
       country: json['country'],
       city: json['city'],
       age: json['age'],
       height: json['height'],
       weight: json['weight'],
-      wins:
-          json['wins'] != null ? FightStatsModel.fromJson(json['wins']) : null,
-      losses: json['losses'] != null
-          ? FightStatsModel.fromJson(json['losses'])
-          : null,
+      wins: json['win'] != null ? FightStatsModel.fromJson(json['win']) : null,
+      losses:
+          json['loss'] != null ? FightStatsModel.fromJson(json['loss']) : null,
       draws: json['draws'],
       fights: getFights(json),
     );

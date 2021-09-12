@@ -28,27 +28,27 @@ class FighterPage extends StatelessWidget {
               Text('Peso: ${fighter.weight}'),
               const SizedBox(height: 48),
               Text(
-                  'Cartel: ${fighter.wins!.qtd} - ${fighter.losses!.qtd} - ${fighter.draws}'),
+                  'Cartel: ${fighter.wins?.qtd ?? 0} - ${fighter.losses?.qtd ?? 0} - ${fighter.draws}'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
                       Text('Vitórias:'),
-                      Text('Quantidade: ${fighter.wins!.qtd}'),
-                      Text('Knockout: ${fighter.wins!.knockout}'),
-                      Text('Submissão: ${fighter.wins!.submission}'),
-                      Text('Decisão: ${fighter.wins!.decision}'),
+                      Text('Quantidade: ${fighter.wins?.qtd ?? 0}'),
+                      Text('Knockout: ${fighter.wins?.knockout ?? 0}'),
+                      Text('Submissão: ${fighter.wins?.submission ?? 0}'),
+                      Text('Decisão: ${fighter.wins?.decision ?? 0}'),
                     ],
                   ),
                   const SizedBox(width: 24),
                   Column(
                     children: [
                       Text('Derrotas:'),
-                      Text('Quantidade: ${fighter.losses!.qtd}'),
-                      Text('Knockout: ${fighter.losses!.knockout}'),
-                      Text('Submissão: ${fighter.losses!.submission}'),
-                      Text('Decisão: ${fighter.losses!.decision}'),
+                      Text('Quantidade: ${fighter.losses?.qtd ?? 0}'),
+                      Text('Knockout: ${fighter.losses?.knockout ?? 0}'),
+                      Text('Submissão: ${fighter.losses?.submission ?? 0}'),
+                      Text('Decisão: ${fighter.losses?.decision ?? 0}'),
                     ],
                   ),
                 ],
@@ -61,11 +61,11 @@ class FighterPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (_, i) => ListTile(
                       leading:
-                          Text(fighter.fights[0].result.toString().toUpperCase()),
+                          Text(fighter.fights[i].result.toString().toUpperCase()),
                       trailing:
-                          Text(fighter.fights[0].date.toString().toUpperCase()),
-                      title: Text(fighter.fights[0].opponent),
-                      subtitle: Text(fighter.fights[0].event),
+                          Text(fighter.fights[i].date.toString().toUpperCase()),
+                      title: Text(fighter.fights[i].opponent),
+                      subtitle: Text(fighter.fights[i].event),
                     ),
                     itemCount: fighter.fights.length,
                   ),
